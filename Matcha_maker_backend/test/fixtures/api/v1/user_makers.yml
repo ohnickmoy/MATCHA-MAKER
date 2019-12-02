@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number_owned: 1
+  user: one
+  maker: one
+
+two:
+  number_owned: 1
+  user: two
+  maker: two
