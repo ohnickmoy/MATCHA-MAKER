@@ -2,10 +2,10 @@
 
 one:
   number_owned: 1
-  user_id: 1
-  maker_id: 1
+  user: one
+  maker: one
 
 two:
   number_owned: 1
-  user_id: 1
-  maker_id: 1
+  user: two
+  maker: two

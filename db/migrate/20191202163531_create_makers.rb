@@ -1,7 +1,7 @@
 class CreateMakers < ActiveRecord::Migration[6.0]
   def change
     create_table :makers do |t|
-      t.string :type
+      t.string :maker_type
       t.integer :click_rate
       t.integer :cost
 
