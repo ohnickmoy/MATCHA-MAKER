@@ -1,2 +1,0 @@
-class Maker < ApplicationRecord
-end

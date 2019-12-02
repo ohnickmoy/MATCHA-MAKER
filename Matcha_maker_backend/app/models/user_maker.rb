@@ -1,2 +1,0 @@
-class UserMaker < ApplicationRecord
-end
