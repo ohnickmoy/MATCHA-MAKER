@@ -36,3 +36,35 @@
     justify-self: center;
     align-self: center;
 }
+
+.maker-container{
+    display: flex;
+    border-style: solid;
+    width: 28vw;
+}
+
+.maker-image{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    height: fit-content;
+}
+
+.maker-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 5px;
+}
+
+#maker-image{
+    height: 100px;
+    width: 100px;
+    padding: 5px 5px;
+}
+
+.icon-container{
+    border-style: solid;
+    width: 38vw;
+    height: 100px;
+}
