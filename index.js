@@ -1,6 +1,8 @@
 let matchaCup = document.querySelector("body > div > div.column.left > img")
 let matchaElement = document.querySelector("body > div > div.column.left > span")
-let matchaCount = parseInt(matchaElement.innerText)
+let matchaCount = 0
+let shopName = document.querySelector("#userShop")
+
 
 let lifetimeMatchaCounter = 0
 
@@ -11,8 +13,10 @@ let cursorCost = 0
 let mps = 0.0
 
 function increaseMatchaCount(){
+    //console.log(matchaCount)
     matchaCount = matchaCount + 1
     matchaElement.innerText = Math.round(matchaCount)
+    matchaCup.dataset.userMatchas = matchaCount
     lifetimeMatchaCounter += 1
     //console.log(lifetimeMatchaCounter)
 }
@@ -42,14 +46,28 @@ function appendMaker(){
             break;
     }
 }
+
+function persistMatchaCount(id, matchas){
+    fetch(`http://localhost:3000/api/v1/users/${id}`, {method: "PATCH", 
+        headers: {
+        "Content-Type": "application/json",
+        accept: "application/json"
+        },
+        body: JSON.stringify({matchas: matchas})
+    })
+}
+
 matchaCup.addEventListener('click', function(e){
     increaseMatchaCount()
+    persistMatchaCount(e.target.dataset.userId, e.target.dataset.userMatchas)
     appendMaker()
 })
 
 setInterval(function(){
+    console.log(matchaCount)
     Math.round(matchaCount += mps)
     matchaElement.innerText = Math.round(matchaCount)
+    matchaCup.dataset.userMatchas = Math.round(matchaCount)
 }, 1000)
 
 
@@ -67,6 +85,32 @@ rightColumn.addEventListener('click', function(e){
             mps = mps + 0.2;
             mpsCounter.innerText = mps.toPrecision(2)
             cursorCostCounter.innerText = Math.round(15 * Math.pow(1.1, parseInt(cursorCounter.innerText)))
+            matchaCup.dataset.userMatchas = matchaCount
+            persistMatchaCount(matchaCup.dataset.userId, matchaCup.dataset.userMatchas)
         }
     }
+})
+
+//fetch get request for user info, hard coded to nick
+function loadUserInfo(json){
+    shopName.innerText = `${json.data.attributes.name}'s Matcha Shop!`
+    matchaCount = json.data.attributes.matchas
+    matchaElement.innerText = json.data.attributes.matchas
+    matchaCup.dataset.userId = json.data.attributes.id
+    matchaCup.dataset.userMatchas = json.data.attributes.matchas
+}
+
+function fetchUserInfo(){
+    fetch('http://localhost:3000/api/v1/users/3')
+        .then(function(resp){
+            return resp.json()
+        })
+        .then(function(json){
+            console.log(json)
+            loadUserInfo(json)
+        })
+}
+
+document.addEventListener('DOMContentLoaded', function(e){
+    fetchUserInfo()
 })
