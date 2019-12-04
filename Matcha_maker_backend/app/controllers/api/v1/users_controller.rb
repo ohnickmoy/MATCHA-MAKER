@@ -11,7 +11,13 @@ class Api::V1::UsersController < ApplicationController
 
     def update
         user = User.find(params[:id])
-        user.update(matchas: params[:matchas])
+        user.update(matcha_params)
         render json: UserSerializer.new(user)
+    end
+
+    private 
+
+    def matcha_params
+        params.require(:user).permit(:matchas, :lifeTimeMatchas, :mps)
     end
 end

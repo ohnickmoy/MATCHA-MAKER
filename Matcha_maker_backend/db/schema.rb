@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_02_182723) do
+ActiveRecord::Schema.define(version: 2019_12_03_213621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 2019_12_02_182723) do
     t.integer "matchas"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "lifeTimeMatchas"
+    t.float "mps"
   end
 
   add_foreign_key "user_makers", "makers"
