@@ -1,18 +1,22 @@
 let matchaCup = document.querySelector("body > div > div.column.left > img")
 let matchaElement = document.querySelector("body > div > div.column.left > span")
-let matchaCount = 0
 let shopName = document.querySelector("#userShop")
 let resetBtn = document.querySelector('#reset')
 let mpsCounter = document.querySelector("#mps")
+let cursorCounterElement = document.querySelector("#cursorCount")
+let cursorCostElement = document.querySelector("#cursorCost")
 
 
+let cursorCounter = 0
+let matchaCount = 0
 let lifetimeMatchaCounter = 0
+let mps = 0.0
+let cursorCost = 15
+
 
 let cursorDiv = document.querySelector("body > div > div.column.right > div.cursor")
 let kenDiv = document.querySelector("body > div > div.column.right > div.kens")
 let rightColumn = document.querySelector("body > div > div.column.right")
-let cursorCost = 0
-let mps = 0.0
 
 function increaseMatchaCount(){
     matchaCount = matchaCount + 1
@@ -42,8 +46,8 @@ cursorIconHolder.style.display = "none"
 let middleColumn = document.querySelector("body > div > div.column.middle")
 
 function iconHolders(){
-    let cursorCounter = document.querySelector("#cursorCount")
-    cursorCounter = parseInt(cursorCounter.innerText)
+    //let cursorCounter = document.querySelector("#cursorCount")
+    //cursorCounter = parseInt(cursorCounter.innerText)
     if(cursorCounter === 1){
         cursorIconHolder.style.display = ""
     }
@@ -67,7 +71,10 @@ function persistMatchaCount(id, matchas){
         "Content-Type": "application/json",
         accept: "application/json"
         },
-        body: JSON.stringify({matchas: matchas, lifeTimeMatchas: lifetimeMatchaCounter, mps: mps})
+        body: JSON.stringify({matchas: matchas, lifeTimeMatchas: lifetimeMatchaCounter, mps: mps, cursors: cursorCounter})
+    })
+    .then(function(){
+        //console.log('Did I make it here?')
     })
 }
 
@@ -86,39 +93,62 @@ setInterval(function(){
 
 
 rightColumn.addEventListener('click', function(e){
-    let cursorCounter = document.querySelector("#cursorCount")
-    let cursorCostCounter = document.querySelector("#cursorCost")
+    // let cursorCounter = document.querySelector("#cursorCount")
+    //let cursorCostCounter = document.querySelector("#cursorCost")
 
     if(e.target.dataset.type === 'cursor-btn'){
-        cursorCost = parseInt(document.querySelector("#cursorCost").innerText)
+        //cursorCost = Math.round(15 * Math.pow(1.1, cursorCounter))
+        console.log(cursorCost)
         if (matchaCount >= cursorCost){
             matchaCount -= cursorCost;
             matchaElement.innerText = Math.round(matchaCount)
-            cursorCounter.innerText = parseInt(cursorCounter.innerText) + 1
+
+            cursorCounter += 1
+            cursorCounterElement.innerText = cursorCounter
+
             mps = mps + 0.2;
+            
             mpsCounter.innerText = mps.toPrecision(2)
-            cursorCostCounter.innerText = Math.round(15 * Math.pow(1.1, parseInt(cursorCounter.innerText)))
+            
+            console.log(cursorCostElement.innerText, 'before')
+            cursorCost = Math.round(15 * Math.pow(1.1, cursorCounter))
+            cursorCostElement.innerText = cursorCost
+
+            console.log(cursorCostElement.innerText, 'after')
+
             matchaCup.dataset.userMatchas = matchaCount
 
-            
 
             persistMatchaCount(matchaCup.dataset.userId, matchaCup.dataset.userMatchas)
+            //persistCursorCount(matchaCup.dataset.userId, parseInt(cursorCounter.innerText))
             iconHolders()
         }
     }
 })
 
-
 //fetch get request for user info, hard coded to nick
 function loadUserInfo(json){
     shopName.innerText = `${json.data.attributes.name}'s Matcha Shop!`
-    matchaCount = json.data.attributes.matchas
     matchaElement.innerText = json.data.attributes.matchas
+    cursorCounterElement.innerText = json.data.attributes.cursors
+    mpsCounter.innerText = json.data.attributes.mps
+    
     matchaCup.dataset.userId = json.data.attributes.id
     matchaCup.dataset.userMatchas = json.data.attributes.matchas
-    //lifetimeMatchaCounter = json.data.attributes.lifeTimeMatchas
-    //mps = json.data.attributes.mps
-    console.log('Life time matcha counter',lifetimeMatchaCounter)
+    
+    matchaCount = json.data.attributes.matchas
+    lifetimeMatchaCounter = json.data.attributes.lifeTimeMatchas
+    mps = json.data.attributes.mps
+
+    mpsCounter.innerText = mps.toPrecision(2)
+
+    cursorCounter = json.data.attributes.cursors
+    cursorCost = Math.round(15 * Math.pow(1.1, cursorCounter))
+
+    cursorCostElement.innerText = cursorCost
+    
+    iconHolders()
+    shopButtons()
 }
 
 function fetchUserInfo(){
@@ -138,6 +168,13 @@ function resetDom(){
     lifetimeMatchaCounter = 0
     mps = 0.0
     matchaCup.dataset.userMatchas = 0
+    cursorButton.style.display = "none";
+
+    cursorCostElement.innerText =  '15'
+    cursorCost = 15
+
+    cursorCounterElement = '0'
+
 }
 
 function resetUserAttributes(id){
@@ -146,13 +183,14 @@ function resetUserAttributes(id){
         "Content-Type": "application/json",
         accept: "application/json"
         },
-    body: JSON.stringify({type: 'reset' , matchas: 0, lifeTimeMatchas: 0, mps: 0})
+    body: JSON.stringify({type: 'reset' , matchas: 0, lifeTimeMatchas: 0, mps: 0, cursors: 0})
 })
 }
 
 resetBtn.addEventListener('click', function(e){
     resetDom()
     resetUserAttributes(matchaCup.dataset.userId)
+    //document.location.reload()
 })
 
 document.addEventListener('DOMContentLoaded', function(e){
