@@ -3,8 +3,15 @@
     font-family: interstate, sans-serif;
     font-weight: 400;
     font-style: normal;
+    color: #134611;
 }
 
+h1 {
+    font-family: interstate, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    text-decoration: underline;
+}
 
 .column {
     display: flex;
@@ -18,7 +25,7 @@
 
 .left, .right {
     width: 30%;
-    background-color: #FFFEF2;
+    background-color: #EFEEDE;
 }
 
 .middle {
@@ -68,3 +75,4 @@
     width: 38vw;
     height: 100px;
 }
+
