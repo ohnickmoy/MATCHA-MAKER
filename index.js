@@ -99,6 +99,9 @@ rightColumn.addEventListener('click', function(e){
             mpsCounter.innerText = mps.toPrecision(2)
             cursorCostCounter.innerText = Math.round(15 * Math.pow(1.1, parseInt(cursorCounter.innerText)))
             matchaCup.dataset.userMatchas = matchaCount
+
+            
+
             persistMatchaCount(matchaCup.dataset.userId, matchaCup.dataset.userMatchas)
             iconHolders()
         }
@@ -150,7 +153,6 @@ function resetUserAttributes(id){
 resetBtn.addEventListener('click', function(e){
     resetDom()
     resetUserAttributes(matchaCup.dataset.userId)
-
 })
 
 document.addEventListener('DOMContentLoaded', function(e){
