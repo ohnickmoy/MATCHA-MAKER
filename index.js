@@ -21,14 +21,29 @@ let rightColumn = document.querySelector("body > div > div.column.right")
 function increaseMatchaCount(){
     matchaCount = matchaCount + 1
     matchaCounterElement.innerText = Math.round(matchaCount)
-    matchaCup.dataset.userMatchas = matchaCount
     lifetimeMatchaCounter += 1
 }
 
+//does math to find to cost of next cursor
 function costOfCursor(){
     return Math.round(15 * Math.pow(1.1, cursorCounter))
 }
 
+//buys cursor, updates dom
+function buyCursor(){
+    matchaCount -= cursorCost;
+    matchaCounterElement.innerText = Math.round(matchaCount)
+
+    cursorCounter += 1
+    cursorCounterElement.innerText = cursorCounter
+
+    mps = mps + 0.2;
+    
+    mpsCounterElement.innerText = mps.toPrecision(2)
+    
+    cursorCost = costOfCursor()
+    cursorCostElement.innerText = cursorCost
+}
 
 //this is the function for the adding shop buttons
 let cursorButton = document.querySelector("#cursor")
@@ -38,9 +53,7 @@ function shopButtons(){
     if(lifetimeMatchaCounter >= 10){
         cursorButton.style.display = "flex"
     }
-    
 }
-
 
 //these are the functions for adding the icon holders
 let cursorIconHolder = document.querySelector("body > div > div.column.middle > div")
@@ -48,8 +61,6 @@ cursorIconHolder.style.display = "none"
 let middleColumn = document.querySelector("body > div > div.column.middle")
 
 function iconHolders(){
-    //let cursorCounter = document.querySelector("#cursorCount")
-    //cursorCounter = parseInt(cursorCounter.innerText)
     if(cursorCounter === 1){
         cursorIconHolder.style.display = ""
     }
@@ -67,7 +78,7 @@ function persistMatchaCount(id, matchas){
 
 matchaCup.addEventListener('click', function(e){
     increaseMatchaCount()
-    persistMatchaCount(e.target.dataset.userId, e.target.dataset.userMatchas)
+    persistMatchaCount(e.target.dataset.userId, matchaCount)
     shopButtons()
 })
 
@@ -75,34 +86,14 @@ setInterval(function(){
     Math.round(matchaCount += mps)
     Math.round(lifetimeMatchaCounter += mps)
     matchaCounterElement.innerText = Math.round(matchaCount)
-    matchaCup.dataset.userMatchas = Math.round(matchaCount)
 }, 1000)
 
 
 rightColumn.addEventListener('click', function(e){
     if(e.target.dataset.type === 'cursor-btn'){
-        console.log(cursorCost)
         if (matchaCount >= cursorCost){
-            matchaCount -= cursorCost;
-            matchaCounterElement.innerText = Math.round(matchaCount)
-
-            cursorCounter += 1
-            cursorCounterElement.innerText = cursorCounter
-
-            mps = mps + 0.2;
-            
-            mpsCounterElement.innerText = mps.toPrecision(2)
-            
-            console.log(cursorCostElement.innerText, 'before')
-            cursorCost = costOfCursor()
-            cursorCostElement.innerText = cursorCost
-
-            console.log(cursorCostElement.innerText, 'after')
-
-            matchaCup.dataset.userMatchas = matchaCount
-
-
-            persistMatchaCount(matchaCup.dataset.userId, matchaCup.dataset.userMatchas)
+            buyCursor()
+            persistMatchaCount(matchaCup.dataset.userId, matchaCount)
             iconHolders()
         }
     }
@@ -116,7 +107,6 @@ function loadUserInfo(attributes){
     mpsCounterElement.innerText = attributes.mps
     
     matchaCup.dataset.userId = attributes.id
-    matchaCup.dataset.userMatchas = attributes.matchas
     
     matchaCount = attributes.matchas
     lifetimeMatchaCounter = attributes.lifeTimeMatchas
@@ -149,14 +139,12 @@ function resetDom(){
     mpsCounterElement.innerText = '0.0'
     lifetimeMatchaCounter = 0
     mps = 0.0
-    matchaCup.dataset.userMatchas = 0
     cursorButton.style.display = "none";
 
     cursorCostElement.innerText =  '15'
     cursorCost = 15
 
     cursorCounterElement = '0'
-
 }
 
 function resetUserAttributes(id){
