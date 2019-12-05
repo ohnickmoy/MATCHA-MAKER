@@ -4,6 +4,7 @@
     font-weight: 400;
     font-style: normal;
     color: #134611;
+    height: 100%;
 }
 
 h1 {
@@ -25,11 +26,17 @@ h1 {
 
 .left, .right {
     width: 30%;
-    background-color: #EFEEDE;
+    background-color: #fcdcdb;
+}
+
+.right{
+    justify-content: flex-start;
 }
 
 .middle {
     width: 40%;
+    background-image: url("https://i.pinimg.com/564x/8b/a5/c3/8ba5c377aea0d1e1fbba849b01d5a415.jpg");
+    background-color: #cccccc;
 }
 
 .row:after {
@@ -39,7 +46,8 @@ h1 {
   }
 
 .image {
-    width: 75%;
+    max-width:60%;
+    height:auto;
     justify-self: center;
     align-self: center;
 }
@@ -48,6 +56,8 @@ h1 {
     display: flex;
     border-style: solid;
     width: 28vw;
+    height: 250px;
+    justify-content: center;
 }
 
 .maker-image{
@@ -60,7 +70,7 @@ h1 {
 .maker-content{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     padding: 5px;
 }
 
@@ -74,5 +84,6 @@ h1 {
     border-style: solid;
     width: 38vw;
     height: 100px;
+    background-color: white;
 }
 
