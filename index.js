@@ -61,19 +61,15 @@ let cursorIconHolder = document.querySelector("body > div > div.column.middle > 
 cursorIconHolder.style.display = "none"
 let middleColumn = document.querySelector("body > div > div.column.middle")
 
-function iconHolders(){
-    if(cursorCounter === 1){
-        let cursorIcon = document.createElement("img")
-        cursorIcon.src = "images/cursor.png"
-        cursorIcon.classList.add("icon")
+function iconHolders(attributes){
+    if(cursorCounter > 0){
         cursorIconHolder.style.display = ""
-        cursorIconHolder.append(cursorIcon)
-    }
-    else if(cursorCounter > 1){
-        let cursorIcon = document.createElement("img")
-        cursorIcon.src = "images/cursor.png"
-        cursorIcon.classList.add("icon")
-        cursorIconHolder.append(cursorIcon)
+        for (i = 0; i < cursorCounter; i++) {
+            let cursorIcon = document.createElement("img")
+            cursorIcon.src = "images/cursor.png"
+            cursorIcon.classList.add("icon")
+            cursorIconHolder.append(cursorIcon);
+          }
     }
 }
 
@@ -130,7 +126,7 @@ function loadUserInfo(attributes){
 
     cursorCostElement.innerText = cursorCost
     
-    iconHolders()
+    iconHolders(attributes)
     shopButtons()
 }
 
