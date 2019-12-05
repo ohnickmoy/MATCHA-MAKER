@@ -103,6 +103,10 @@ setInterval(function(){
 rightColumn.addEventListener('click', function(e){
     if(e.target.dataset.type === 'cursor-btn'){
         if (matchaCount >= cursorCost){
+            if(cursorCounter === 0){
+                cursorIconHolder.style.display = ""
+            }
+
             buyCursor()
             persistMatchaCount(matchaCup.dataset.userId, matchaCount)
             //iconHolders()
@@ -153,11 +157,13 @@ function resetDom(){
     mps = 0.0
     cursorButton.style.display = "none";
     cursorIconHolder.style.display = "none";
+    cursorIconHolder.innerHTML = ''
 
     cursorCostElement.innerText =  '15'
     cursorCost = 15
 
-    cursorCounterElement = '0'
+    cursorCounterElement.innerText = '0'
+    cursorCounter = 0   
 }
 
 function resetUserAttributes(id){
