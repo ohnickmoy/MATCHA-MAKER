@@ -56,19 +56,23 @@ function shopButtons(){
     }
 }
 
+function appendCursorToHolder(){
+    let cursorIcon = document.createElement("img")
+    cursorIcon.src = "images/cursor.png"
+    cursorIcon.classList.add("icon")
+    cursorIconHolder.append(cursorIcon);   
+}
+
 //these are the functions for adding the icon holders
 let cursorIconHolder = document.querySelector("body > div > div.column.middle > div")
 cursorIconHolder.style.display = "none"
 let middleColumn = document.querySelector("body > div > div.column.middle")
 
-function iconHolders(attributes){
+function iconHolders(){
     if(cursorCounter > 0){
         cursorIconHolder.style.display = ""
         for (i = 0; i < cursorCounter; i++) {
-            let cursorIcon = document.createElement("img")
-            cursorIcon.src = "images/cursor.png"
-            cursorIcon.classList.add("icon")
-            cursorIconHolder.append(cursorIcon);
+            appendCursorToHolder()
           }
     }
 }
@@ -101,7 +105,8 @@ rightColumn.addEventListener('click', function(e){
         if (matchaCount >= cursorCost){
             buyCursor()
             persistMatchaCount(matchaCup.dataset.userId, matchaCount)
-            iconHolders()
+            //iconHolders()
+            appendCursorToHolder()
         }
     }
 })
@@ -126,7 +131,7 @@ function loadUserInfo(attributes){
 
     cursorCostElement.innerText = cursorCost
     
-    iconHolders(attributes)
+    iconHolders()
     shopButtons()
 }
 
@@ -147,6 +152,7 @@ function resetDom(){
     lifetimeMatchaCounter = 0
     mps = 0.0
     cursorButton.style.display = "none";
+    cursorIconHolder.style.display = "none";
 
     cursorCostElement.innerText =  '15'
     cursorCost = 15
