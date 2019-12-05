@@ -7,6 +7,7 @@ let cursorCounterElement = document.querySelector("#cursorCount")
 let cursorCostElement = document.querySelector("#cursorCost")
 
 
+
 let cursorCounter = 0
 let matchaCount = 0
 let lifetimeMatchaCounter = 0
@@ -49,7 +50,17 @@ function iconHolders(){
     //let cursorCounter = document.querySelector("#cursorCount")
     //cursorCounter = parseInt(cursorCounter.innerText)
     if(cursorCounter === 1){
+        let cursorIcon = document.createElement("img")
+        cursorIcon.src = "images/cursor.png"
+        cursorIcon.classList.add("icon")
         cursorIconHolder.style.display = ""
+        cursorIconHolder.append(cursorIcon)
+    }
+    else if(cursorCounter > 1){
+        let cursorIcon = document.createElement("img")
+        cursorIcon.src = "images/cursor.png"
+        cursorIcon.classList.add("icon")
+        cursorIconHolder.append(cursorIcon)
     }
 }
 
