@@ -142,6 +142,7 @@ function fetchUserInfo(){
         })
         .then(function(json){
             loadUserInfo(json.data.attributes)
+            new User(json.data.attributes)
         })
 }
 
@@ -169,6 +170,8 @@ function resetUserAttributes(id){
     body: JSON.stringify({type: 'reset' , matchas: 0, lifeTimeMatchas: 0, mps: 0, cursors: 0})
 })
 }
+
+
 
 resetBtn.addEventListener('click', function(e){
     resetDom()

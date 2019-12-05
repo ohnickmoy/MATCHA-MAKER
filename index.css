@@ -4,7 +4,6 @@
     font-weight: 400;
     font-style: normal;
     color: #134611;
-    height: 100%;
 }
 
 h1 {
@@ -62,7 +61,6 @@ p {
     display: flex;
     border-style: solid;
     width: 28vw;
-    height: 250px;
     justify-content: center;
 }
 
@@ -76,7 +74,7 @@ p {
 .maker-content{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     padding: 5px;
 }
 
@@ -97,3 +95,35 @@ p {
     height: 20px;
     width: 20px;
 }
+
+.nav-flex {
+    width: 28vw;
+    height: 10vw;
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    align-items: center;
+    background: url(https://pa1.narvii.com/7332/a6d00efa7ce2cc7d580f6096504258a2513c916dr5-200-200_00.gif) repeat 0 0;
+    text-align: center;
+    padding-top: .5vw;
+    padding-bottom: .5vw;
+    -webkit-animation: slide 20s alternate infinite;
+    opacity: 0.8;
+    filter: alpha(opacity=50);
+    
+  }
+
+  h2 {
+    color: red;
+    font-weight: bold;
+    font-size: 40px;
+    letter-spacing: 8px;
+  }
+
+  h3 {
+    color: green;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 8px;
+  }
