@@ -18,6 +18,6 @@ class Api::V1::UsersController < ApplicationController
     private 
 
     def matcha_params
-        params.require(:user).permit(:matchas, :lifeTimeMatchas, :mps, :cursors)
+        params.require(:user).permit(:matchas, :lifeTimeMatchas, :mps, :cursors, :baberistas)
     end
 end

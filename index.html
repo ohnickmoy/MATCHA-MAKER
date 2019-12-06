@@ -20,7 +20,10 @@
         </div>
         <div class="column middle">
                 <h1>Matcha Maker!</h1>
-            <div class="icon-container">
+            <div class="icon-container" id="cursorHolder">
+            </div>
+            <br>
+            <div class="icon-container" id="baberistaHolder">
             </div>
         </div>
         <div class="column right">
@@ -38,10 +41,19 @@
                 <div style="flex-grow: 8" class="maker-content" data-type="cursor-btn">
                     <div data-type="cursor-btn">Cursors: <span id="cursorCount">0</span></div>
                     <div data-type="cursor-btn">Cursor Cost: <span id="cursorCost">15</span></div>
+                    <p>Auto clicks every second</p>
                 </div>
             </div>
-            <div class="kens">
-    
+            <br>
+            <div class="maker-container" data-type="baberistas-btn" id="baberistas">
+                <div class="maker-image">
+                    <img src="images/baberista-02.png" id="maker-image" data-type="baberistas-btn">
+                </div>
+                <div style="flex-grow: 8" class="maker-content" data-type="baberistas-btn">
+                    <div data-type="baberistas-btn">Baberistas: <span id="baberistaCount">0</span></div>
+                    <div data-type="baberistas-btn">Baberistas Cost: <span id="baberistaCost">100</span></div>
+                    <p>Just your friendly baberista brewing some matcha</p>
+                </div>
             </div>
         </div>
     </div>
