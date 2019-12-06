@@ -34,7 +34,7 @@ function costOfCursor(){
 }
 
 function costOfBaberista(){
-    return Math.round(100 * Math.pow(1.1, baberistaCounter))
+    return Math.round(50 * Math.pow(1.1, baberistaCounter))
 }
 
 //buys cursor, updates dom
@@ -79,7 +79,7 @@ function shopButtons(){
         cursorButton.style.display = "flex"
     }
 
-    if(lifetimeMatchaCounter >= 100){
+    if(lifetimeMatchaCounter >= 50){
         baberistaButton.style.display = "flex"
     }
 }
@@ -96,6 +96,7 @@ function appendBaberistaToHolder(){
     let baberistaIcon = document.createElement('img')
     baberistaIcon.src = "images/baberista-02.png"
     baberistaIcon.classList.add("icon")
+    baberistaIcon.classList.add("w3-spin")
     baberistaIconHolder.append(baberistaIcon);   
 }
 
