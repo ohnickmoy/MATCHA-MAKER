@@ -88,6 +88,7 @@ function appendCursorToHolder(){
     let cursorIcon = document.createElement("img")
     cursorIcon.src = "images/cursor.png"
     cursorIcon.classList.add("icon")
+    cursorIcon.classList.add("w3-animate-zoom")
     cursorIconHolder.append(cursorIcon);   
 }
 
